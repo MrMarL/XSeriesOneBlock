@@ -14,7 +14,7 @@
 		<repository>
 			<id>internal.repo</id>
 			<name>Temporary Staging Repository</name>
-			<url>file://${project.build.directory}/test</url>
+			<url>file://${project.build.directory}/main</url>
 		</repository>
 	</distributionManagement>
 
@@ -53,7 +53,7 @@
 				<artifactId>maven-deploy-plugin</artifactId>
 				<version>2.8.2</version>
 				<configuration>
-					<altDeploymentRepository>internal.repo::default::file://${project.build.directory}/test</altDeploymentRepository>
+					<altDeploymentRepository>internal.repo::default::file://${project.build.directory}/main</altDeploymentRepository>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -63,7 +63,7 @@
 				<configuration>
 					<message>Maven artifacts for ${project.version}</message>
 					<noJekyll>true</noJekyll>
-					<outputDirectory>${project.build.directory}/test</outputDirectory>
+					<outputDirectory>${project.build.directory}/main</outputDirectory>
 					<branch>refs/heads/test</branch>
 					<includes>
 						<include>**/*</include>
