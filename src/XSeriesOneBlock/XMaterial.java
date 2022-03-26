@@ -2085,7 +2085,7 @@ public enum XMaterial {
             Matcher matcher = Pattern.compile("MC: \\d\\.(\\d+)").matcher(version);
 
             if (matcher.find()) return Integer.parseInt(matcher.group(1));
-            throw new IllegalArgumentException("Failed to parse server version from: " + version);
+            return 7;
         }
     }
 }
