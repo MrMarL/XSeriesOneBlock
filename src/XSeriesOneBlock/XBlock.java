@@ -123,7 +123,11 @@ public final class XBlock {
     	return true;
     }
     
-    public static boolean setType(@Nonnull Block block, @Nullable Object material_) {
+    public static boolean setType(Block block, Object material_) {
+    	setType(block, material_, true);
+    }
+    
+    public static boolean setType(Block block, Object material_, boolean physics) {
     	XMaterial material = null;
     	if (material_.getClass() == XMaterial.class)
     		material = (XMaterial)material_;
@@ -134,7 +138,7 @@ public final class XBlock {
         if (smartConversion != null) material = smartConversion;
         if (material.parseMaterial() == null) return false;
 
-        block.setType(material.parseMaterial());
+        block.setType(material.parseMaterial(), physics);
         if (XMaterial.supports(13)) return false;
 
         String parsedName = material.parseMaterial().name();
