@@ -124,7 +124,7 @@ public final class XBlock {
     }
     
     public static boolean setType(Block block, Object material_) {
-    	setType(block, material_, true);
+    	return setType(block, material_, true);
     }
     
     public static boolean setType(Block block, Object material_, boolean physics) {
