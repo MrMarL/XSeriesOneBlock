@@ -134,7 +134,7 @@ public final class XBlock {
         if (smartConversion != null) material = smartConversion;
         if (material.parseMaterial() == null) return false;
 
-        block.setType(material.parseMaterial(), physics);
+        block.setType(material.parseMaterial());
         if (XMaterial.supports(13)) return false;
 
         String parsedName = material.parseMaterial().name();
