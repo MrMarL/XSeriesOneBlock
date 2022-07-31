@@ -1,4 +1,4 @@
-package main.java.xseriesoneblock;
+package XSeriesOneBlock;
 
 /*
  * The MIT License (MIT)
