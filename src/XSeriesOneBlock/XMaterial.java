@@ -1488,45 +1488,6 @@ public enum XMaterial {
     XMaterial(String... legacy) { this(0, legacy); }
 
     /**
-     * Checks if the version is 1.13 Aquatic Update or higher.
-     * An invocation of this method yields the cached result from the expression:
-     * <p>
-     * <blockquote>
-     * {@link #supports(int) 13}}
-     * </blockquote>
-     *
-     * @return true if 1.13 or higher.
-     * @see #getVersion()
-     * @see #supports(int)
-     * @since 1.0.0
-     * @deprecated Use {@code XMaterial.supports(13)} instead. This method name can be confusing.
-     */
-    @Deprecated
-    public static boolean isNewVersion() {
-        return Data.ISFLAT;
-    }
-
-    /**
-     * This is just an extra method that can be used for many cases.
-     * It can be used in {@link org.bukkit.event.player.PlayerInteractEvent}
-     * or when accessing {@link org.bukkit.entity.Player#getMainHand()},
-     * or other compatibility related methods.
-     * <p>
-     * An invocation of this method yields exactly the same result as the expression:
-     * <p>
-     * <blockquote>
-     * !{@link #supports(int)} 9
-     * </blockquote>
-     *
-     * @since 2.0.0
-     * @deprecated Use {@code !XMaterial.supports(9)} instead.
-     */
-    @Deprecated
-    public static boolean isOneEight() {
-        return !supports(9);
-    }
-
-    /**
      * Gets the XMaterial with this name similar to {@link #valueOf(String)}
      * without throwing an exception.
      *
