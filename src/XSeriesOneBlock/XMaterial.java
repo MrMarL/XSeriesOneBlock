@@ -73,8 +73,8 @@ public enum XMaterial {
     ACACIA_DOOR("ACACIA_DOOR", "ACACIA_DOOR_ITEM"),
     ACACIA_FENCE,
     ACACIA_FENCE_GATE,
-    ACACIA_LEAVES(4, "LEAVES_2"),
-    ACACIA_LOG(4, "LOG_2"),
+    ACACIA_LEAVES(0, "LEAVES_2"),
+    ACACIA_LOG(0, "LOG_2"),
     ACACIA_PLANKS(4, "WOOD"),
     ACACIA_PRESSURE_PLATE("WOOD_PLATE"),
     ACACIA_SAPLING(4, "SAPLING"),
@@ -83,7 +83,7 @@ public enum XMaterial {
     ACACIA_STAIRS,
     ACACIA_TRAPDOOR("TRAP_DOOR"),
     ACACIA_WALL_SIGN("WALL_SIGN"),
-    ACACIA_WOOD(4, "LOG_2"),
+    ACACIA_WOOD(0, "LOG_2"),
     ACTIVATOR_RAIL,
     /**
      * https://minecraft.gamepedia.com/Air
@@ -389,8 +389,8 @@ public enum XMaterial {
     DARK_OAK_DOOR("DARK_OAK_DOOR", "DARK_OAK_DOOR_ITEM"),
     DARK_OAK_FENCE,
     DARK_OAK_FENCE_GATE,
-    DARK_OAK_LEAVES(5, "LEAVES_2"),
-    DARK_OAK_LOG(5, "LOG_2"),
+    DARK_OAK_LEAVES(1, "LEAVES_2"),
+    DARK_OAK_LOG(1, "LOG_2"),
     DARK_OAK_PLANKS(5, "WOOD"),
     DARK_OAK_PRESSURE_PLATE("WOOD_PLATE"),
     DARK_OAK_SAPLING(5, "SAPLING"),
@@ -399,7 +399,7 @@ public enum XMaterial {
     DARK_OAK_STAIRS,
     DARK_OAK_TRAPDOOR("TRAP_DOOR"),
     DARK_OAK_WALL_SIGN("WALL_SIGN"),
-    DARK_OAK_WOOD(5, "LOG_2"),
+    DARK_OAK_WOOD(1, "LOG_2"),
     DARK_PRISMARINE(2, "PRISMARINE"),
     DARK_PRISMARINE_SLAB,
     DARK_PRISMARINE_STAIRS,
@@ -1010,36 +1010,36 @@ public enum XMaterial {
     POTATOES("POTATO"),
     POTION,
     POTTED_ACACIA_SAPLING(4, "FLOWER_POT"),
-    POTTED_ALLIUM(2, "RED_ROSE", "FLOWER_POT"),
+    POTTED_ALLIUM(2, "FLOWER_POT"),
     POTTED_AZALEA_BUSH,
-    POTTED_AZURE_BLUET(3, "RED_ROSE", "FLOWER_POT"),
+    POTTED_AZURE_BLUET(3, "FLOWER_POT"),
     POTTED_BAMBOO,
     POTTED_BIRCH_SAPLING(2, "FLOWER_POT"),
-    POTTED_BLUE_ORCHID(1, "RED_ROSE", "FLOWER_POT"),
+    POTTED_BLUE_ORCHID(1, "FLOWER_POT"),
     POTTED_BROWN_MUSHROOM("FLOWER_POT"),
     POTTED_CACTUS("FLOWER_POT"),
     POTTED_CORNFLOWER,
     POTTED_CRIMSON_FUNGUS,
     POTTED_CRIMSON_ROOTS,
-    POTTED_DANDELION("YELLOW_FLOWER", "FLOWER_POT"),
+    POTTED_DANDELION("FLOWER_POT"),
     POTTED_DARK_OAK_SAPLING(5, "FLOWER_POT"),
     POTTED_DEAD_BUSH("FLOWER_POT"),
-    POTTED_FERN(2, "LONG_GRASS", "FLOWER_POT"),
+    POTTED_FERN(2, "FLOWER_POT"),
     POTTED_FLOWERING_AZALEA_BUSH,
     POTTED_JUNGLE_SAPLING(3, "FLOWER_POT"),
     POTTED_LILY_OF_THE_VALLEY,
     POTTED_MANGROVE_PROPAGULE,
     POTTED_OAK_SAPLING("FLOWER_POT"),
-    POTTED_ORANGE_TULIP(5, "RED_ROSE", "FLOWER_POT"),
-    POTTED_OXEYE_DAISY(8, "RED_ROSE", "FLOWER_POT"),
-    POTTED_PINK_TULIP(7, "RED_ROSE", "FLOWER_POT"),
-    POTTED_POPPY("RED_ROSE", "FLOWER_POT"),
+    POTTED_ORANGE_TULIP(5, "FLOWER_POT"),
+    POTTED_OXEYE_DAISY(8, "FLOWER_POT"),
+    POTTED_PINK_TULIP(7, "FLOWER_POT"),
+    POTTED_POPPY("FLOWER_POT"),
     POTTED_RED_MUSHROOM("FLOWER_POT"),
-    POTTED_RED_TULIP(4, "RED_ROSE", "FLOWER_POT"),
+    POTTED_RED_TULIP(4, "FLOWER_POT"),
     POTTED_SPRUCE_SAPLING(1, "FLOWER_POT"),
     POTTED_WARPED_FUNGUS,
     POTTED_WARPED_ROOTS,
-    POTTED_WHITE_TULIP(6, "RED_ROSE", "FLOWER_POT"),
+    POTTED_WHITE_TULIP(6, "FLOWER_POT"),
     POTTED_WITHER_ROSE,
     POWDER_SNOW,
     POWDER_SNOW_BUCKET,
@@ -1128,6 +1128,10 @@ public enum XMaterial {
     RED_CARPET(14, "CARPET"),
     RED_CONCRETE(14, "CONCRETE"),
     RED_CONCRETE_POWDER(14, "CONCRETE_POWDER"),
+    /**
+     * 1.13 renamed to ROSE_RED
+     * 1.14 renamed to RED_DYE
+     */
     RED_DYE(1, "INK_SACK", "ROSE_RED"),
     RED_GLAZED_TERRACOTTA,
     RED_MUSHROOM,
@@ -1430,6 +1434,10 @@ public enum XMaterial {
     YELLOW_CARPET(4, "CARPET"),
     YELLOW_CONCRETE(4, "CONCRETE"),
     YELLOW_CONCRETE_POWDER(4, "CONCRETE_POWDER"),
+    /**
+     * 1.13 renamed to DANDELION_YELLOW
+     * 1.14 renamed to YELLOW_DYE
+     */
     YELLOW_DYE(11, "INK_SACK", "DANDELION_YELLOW"),
     YELLOW_GLAZED_TERRACOTTA,
     YELLOW_SHULKER_BOX,
@@ -1447,7 +1455,7 @@ public enum XMaterial {
     ZOMBIFIED_PIGLIN_SPAWN_EGG(57, "MONSTER_EGG", "ZOMBIE_PIGMAN_SPAWN_EGG");
 
 
-    /**
+	 /**
      * Cached array of {@link XMaterial#values()} to avoid allocating memory for
      * calling the method every time.
      *
@@ -1719,11 +1727,15 @@ public enum XMaterial {
         }
 
         // Refer to the enum for info.
-        // Currently this is the only material with a non-zero data value
+        // Currently, these are the only materials with a non-zero data value
         // that has been renamed after the flattening update.
-        // If this happens to more materials in the future,
-        // I might have to change then system.
-        if (Data.ISFLAT && !supports(14) && material.equals("CACTUS_GREEN")) return GREEN_DYE;
+        // If this happens to more materials in the future, I might have to change the system.
+        if (supports(13) && !supports(14)) {
+            // https://hub.spigotmc.org/stash/projects/SPIGOT/repos/bukkit/diff/src/main/java/org/bukkit/Material.java?until=67d908a9830c71267ee740f5bddd728ce9c64cc7
+            if (material.equals("CACTUS_GREEN")) return GREEN_DYE;
+            if (material.equals("ROSE_RED")) return RED_DYE;
+            if (material.equals("DANDELION_YELLOW")) return YELLOW_DYE;
+        }
 
         // Check FILLED_MAP enum for more info.
         // if (!Data.ISFLAT && item.hasItemMeta() && item.getItemMeta() instanceof org.bukkit.inventory.meta.MapMeta) return FILLED_MAP;
