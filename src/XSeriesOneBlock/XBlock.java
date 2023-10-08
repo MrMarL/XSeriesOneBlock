@@ -5,7 +5,7 @@ import org.bukkit.Bukkit;
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2021 Crypto Morin
+ * Copyright (c) 2023 Crypto Morin
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -34,7 +34,6 @@ import org.bukkit.block.BlockState;
 import org.bukkit.material.*;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.*;
 
 /**
@@ -47,7 +46,7 @@ import java.util.*;
  * This class doesn't and shouldn't support materials that are {@link Material#isLegacy()}.
  *
  * @author Crypto Morin
- * @version 2.2.0
+ * @version 2.2.1
  * @see Block
  * @see BlockState
  * @see MaterialData
@@ -56,9 +55,13 @@ import java.util.*;
 @SuppressWarnings("deprecation")
 public final class XBlock {
     public static final Set<XMaterial> CROPS = Collections.unmodifiableSet(EnumSet.of(
-            XMaterial.CARROT, XMaterial.POTATO, XMaterial.NETHER_WART, XMaterial.WHEAT_SEEDS, XMaterial.PUMPKIN_SEEDS,
-            XMaterial.MELON_SEEDS, XMaterial.BEETROOT_SEEDS, XMaterial.SUGAR_CANE, XMaterial.BAMBOO_SAPLING, XMaterial.CHORUS_PLANT,
-            XMaterial.KELP, XMaterial.SEA_PICKLE, XMaterial.BROWN_MUSHROOM, XMaterial.RED_MUSHROOM
+            XMaterial.CARROT, XMaterial.CARROTS, XMaterial.POTATO, XMaterial.POTATOES,
+            XMaterial.NETHER_WART, XMaterial.PUMPKIN_SEEDS, XMaterial.WHEAT_SEEDS, XMaterial.WHEAT,
+            XMaterial.MELON_SEEDS, XMaterial.BEETROOT_SEEDS, XMaterial.BEETROOTS, XMaterial.SUGAR_CANE,
+            XMaterial.BAMBOO_SAPLING, XMaterial.BAMBOO, XMaterial.CHORUS_PLANT,
+            XMaterial.KELP, XMaterial.KELP_PLANT, XMaterial.SEA_PICKLE, XMaterial.BROWN_MUSHROOM, XMaterial.RED_MUSHROOM,
+            XMaterial.MELON_STEM, XMaterial.PUMPKIN_STEM
+
     ));
     private static final boolean ISFLAT = XMaterial.supports(13);
     private static final Map<XMaterial, XMaterial> ITEM_TO_BLOCK = new EnumMap<>(XMaterial.class);
@@ -89,7 +92,7 @@ public final class XBlock {
     	return setType(block, material_, true);
     }
     
-    public static boolean setType(Block block, Object material_, boolean physics) {
+    public static boolean setType(Block block, Object material_, boolean applyPhysics) {
     	XMaterial material = null;
     	if (material_.getClass() == XMaterial.class)
     		material = (XMaterial)material_;
@@ -100,7 +103,7 @@ public final class XBlock {
         if (smartConversion != null) material = smartConversion;
         if (material.parseMaterial() == null) return false;
 
-        block.setType(material.parseMaterial(), physics);
+        block.setType(material.parseMaterial(), applyPhysics);
         if (ISFLAT) return false;
 
         String parsedName = material.parseMaterial().name();
@@ -108,14 +111,15 @@ public final class XBlock {
             String blockName = parsedName.substring(0, parsedName.length() - "_ITEM".length());
             Material blockMaterial = Objects.requireNonNull(Material.getMaterial(blockName),
                     () -> "Could not find block material for item '" + parsedName + "' as '" + blockName + '\'');
-            block.setType(blockMaterial);
+            block.setType(blockMaterial, applyPhysics);
         } else if (parsedName.contains("CAKE")) {
             Material blockMaterial = Material.getMaterial("CAKE_BLOCK");
-            block.setType(blockMaterial);
+            block.setType(blockMaterial, applyPhysics);
         }
 
         LegacyMaterial legacyMaterial = LegacyMaterial.getMaterial(parsedName);
-        if (legacyMaterial == LegacyMaterial.BANNER) block.setType(LegacyMaterial.STANDING_BANNER.material);
+        if (legacyMaterial == LegacyMaterial.BANNER)
+            block.setType(LegacyMaterial.STANDING_BANNER.material, applyPhysics);
         LegacyMaterial.Handling handling = legacyMaterial == null ? null : legacyMaterial.handling;
 
         BlockState state = block.getState();
@@ -181,11 +185,13 @@ public final class XBlock {
                         case REDWOOD:
                         case BIRCH:
                         case JUNGLE:
-                            if (!firstType) throw new AssertionError("Invalid tree species " + species + " for block type" + legacyMaterial + ", use block type 2 instead");
+                            if (!firstType)
+                                throw new AssertionError("Invalid tree species " + species + " for block type" + legacyMaterial + ", use block type 2 instead");
                             break;
                         case ACACIA:
                         case DARK_OAK:
-                            if (firstType) throw new AssertionError("Invalid tree species " + species + " for block type 2 " + legacyMaterial + ", use block type instead");
+                            if (firstType)
+                                throw new AssertionError("Invalid tree species " + species + " for block type 2 " + legacyMaterial + ", use block type instead");
                             break;
                     }
                     state.setRawData((byte) ((state.getRawData() & 0xC) | (species.getData() & 0x3)));
@@ -204,7 +210,7 @@ public final class XBlock {
             update = true;
         }
 
-        if (update) state.update();
+        if (update) state.update(false, applyPhysics);
         return update;
     }
 
