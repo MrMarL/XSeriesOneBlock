@@ -82,9 +82,9 @@ public final class XBlock {
         ITEM_TO_BLOCK.put(XMaterial.PUMPKIN_PIE, XMaterial.PUMPKIN);
     }
     
-    public static boolean setCustomType(@Nonnull Location loc, String command) {
+    public static boolean setCustomType(@Nonnull Block block, String command) {
     	Bukkit.dispatchCommand(Bukkit.getConsoleSender(),
-    			String.format(command, loc.getBlockX(), loc.getBlockY(), loc.getBlockZ()));
+    			String.format(command, block.getX(), block.getY(), block.getZ()));
     	return true;
     }
     
@@ -93,12 +93,19 @@ public final class XBlock {
     }
     
     public static boolean setType(Block block, Object material_, boolean applyPhysics) {
-    	XMaterial material = null;
-    	if (material_.getClass() == XMaterial.class)
-    		material = (XMaterial)material_;
-    	else
-    		return setCustomType(block.getLocation(), (String)material_);
-    	
+    	Class<?> matClass = material_.getClass();
+    	if (matClass == XMaterial.class)
+    		return setType(block, (XMaterial)material_, applyPhysics);
+    	else if (matClass == Material.class) {
+    		block.setType((Material)material_, applyPhysics);
+    		return true;
+    	}
+    	else if (matClass == String.class)
+    		return setCustomType(block, (String)material_);
+    	return false; 
+    }
+    
+    public static boolean setType(Block block, XMaterial material, boolean applyPhysics) {
         XMaterial smartConversion = ITEM_TO_BLOCK.get(material);
         if (smartConversion != null) material = smartConversion;
         if (material.parseMaterial() == null) return false;
